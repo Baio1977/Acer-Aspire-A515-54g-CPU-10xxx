@@ -20,6 +20,10 @@
 ![infodp1](./Screenshot/3.png)
 ![infodp2](./Screenshot/4.png)
 
+## TouchPad and Gesture
+
+![infodp1](./Screenshot/5.png)
+
 ### What works and What doesn't or WIP:
 
 - [x] Intel UHD 630 iGPU HDMI Output
