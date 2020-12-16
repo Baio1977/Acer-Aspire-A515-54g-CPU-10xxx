@@ -1,4 +1,4 @@
-# Acer-Aspire-A515-54g-CPU-10xxx
+# Acer Aspire A515-54g CPU I5\I7 10xxxU
 
 ![infodp1](./Screenshot/1.jpg)
 ![infodp1](./Screenshot/2.jpg)
