@@ -17,8 +17,8 @@
 
 ## DPCIManager Screenshot
 
-![infodp1](./Screenshot/6.png)
-![infodp2](./Screenshot/7.png)
+![infodp1](./Screenshot/3.png)
+![infodp2](./Screenshot/4.png)
 
 ### What works and What doesn't or WIP:
 
