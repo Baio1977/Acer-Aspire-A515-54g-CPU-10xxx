@@ -1,22 +1,22 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20200925 (64-bit version)
- * Copyright (c) 2000 - 2020 Intel Corporation
+ * AML/ASL+ Disassembler version 20210331 (64-bit version)
+ * Copyright (c) 2000 - 2021 Intel Corporation
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLIQQJTl.aml, Tue Aug 24 12:28:21 2021
+ * Disassembly of iASLnb0SNa.aml, Sun Nov 14 12:16:30 2021
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x000005A6 (1446)
+ *     Length           0x0000057D (1405)
  *     Revision         0x02
- *     Checksum         0x83
+ *     Checksum         0xD1
  *     OEM ID           "HACK"
  *     OEM Table ID     "HackLife"
  *     OEM Revision     0x00000000 (0)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20200925 (538970405)
+ *     Compiler Version 0x20210331 (539034417)
  */
 DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
 {
@@ -39,7 +39,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
     {
         If (_OSI ("Darwin"))
         {
-            GPHD = 0x02
+            GPHD = Zero
             STAS = One
         }
 
@@ -51,35 +51,9 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
                 {
                     Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                     {
-                        0x6F, 
+                        0x1C, 
                         0x03
                     })
-                }
-            }
-
-            Device (ALS0)
-            {
-                Name (_HID, "ACPI0008" /* Ambient Light Sensor Device */)  // _HID: Hardware ID
-                Name (_CID, "smc-als")  // _CID: Compatible ID
-                Name (_ALI, 0x012C)  // _ALI: Ambient Light Illuminance
-                Name (_ALR, Package (0x01)  // _ALR: Ambient Light Response
-                {
-                    Package (0x02)
-                    {
-                        0x64, 
-                        0x012C
-                    }
-                })
-                Method (_STA, 0, NotSerialized)  // _STA: Status
-                {
-                    If (_OSI ("Darwin"))
-                    {
-                        Return (0x0F)
-                    }
-                    Else
-                    {
-                        Return (Zero)
-                    }
                 }
             }
 
@@ -110,7 +84,35 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
                 {
                     If (_OSI ("Darwin"))
                     {
-                        Name (USTP, One)
+                        Method (PKGX, 3, Serialized)
+                        {
+                            Name (PKG, Package (0x03)
+                            {
+                                Zero, 
+                                Zero, 
+                                Zero
+                            })
+                            PKG [Zero] = Arg0
+                            PKG [One] = Arg1
+                            PKG [0x02] = Arg2
+                            Return (PKG) /* \_SB_.PCI0.I2C0.PKGX.PKG_ */
+                        }
+
+                        Method (SSCN, 0, NotSerialized)
+                        {
+                            Return (PKGX (SSH0, SSL0, SSD0))
+                        }
+
+                        Method (FMCN, 0, NotSerialized)
+                        {
+                            Name (PKG, Package (0x03)
+                            {
+                                0x0101, 
+                                0x012C, 
+                                0x62
+                            })
+                            Return (PKG) /* \_SB_.PCI0.I2C0.FMCN.PKG_ */
+                        }
                     }
 
                     Scope (TPD0)
@@ -396,16 +398,12 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
                         })
                     }
 
-                    Return (Package (0x08)
+                    Return (Package (0x04)
                     {
-                        "kUSBSleepPowerSupply", 
-                        0x13EC, 
                         "kUSBSleepPortCurrentLimit", 
-                        0x0834, 
-                        "kUSBWakePowerSupply", 
-                        0x13EC, 
+                        0x0BB8, 
                         "kUSBWakePortCurrentLimit", 
-                        0x0834
+                        0x0BB8
                     })
                 }
 
