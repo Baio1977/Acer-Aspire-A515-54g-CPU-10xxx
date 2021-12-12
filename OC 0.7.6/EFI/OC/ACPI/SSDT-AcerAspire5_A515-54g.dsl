@@ -5,13 +5,13 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLAAeSeI.aml, Sat Dec 11 09:59:24 2021
+ * Disassembly of iASLMR01KB.aml, Sun Dec 12 17:46:24 2021
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x0000067E (1662)
+ *     Length           0x000006AB (1707)
  *     Revision         0x02
- *     Checksum         0x31
+ *     Checksum         0xAB
  *     OEM ID           "HACK"
  *     OEM Table ID     "HackLife"
  *     OEM Revision     0x00000000 (0)
@@ -20,6 +20,7 @@
  */
 DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
 {
+    External (_SB_.ACAD, DeviceObj)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.GFX0, DeviceObj)
     External (_SB_.PCI0.I2C0, DeviceObj)
@@ -46,6 +47,18 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "HackLife", 0x00000000)
 
         Scope (_SB)
         {
+            Scope (ACAD)
+            {
+                If (_OSI ("Darwin"))
+                {
+                    Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
+                    {
+                        0x18, 
+                        0x03
+                    })
+                }
+            }
+
             Scope (PCI0)
             {
                 Scope (GFX0)
